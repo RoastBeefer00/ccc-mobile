@@ -22,23 +22,26 @@ class GeneratorPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-FutureBuilder<List<ClubEvent>>(
-  future: schedule,
-  builder: (context, snapshot) {
-    if (snapshot.hasData) {
-      return ListView(
-        children: [
-        for (var event in snapshot.data!) ListTile(title: BigCard(name: event.name, date: event.date)),
-        ],
-      );
-    } else if (snapshot.hasError) {
-      return Text('${snapshot.error}');
-    }
+          FutureBuilder<List<ClubEvent>>(
+            future: schedule,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView(
+                  children: [
+                    for (var event in snapshot.data!)
+                      ListTile(
+                        title: BigCard(name: event.name, date: event.date),
+                      ),
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
 
-    // By default, show a loading spinner.
-    return const CircularProgressIndicator();
-  },
-)
+              // By default, show a loading spinner.
+              return const CircularProgressIndicator();
+            },
+          ),
         ],
       ),
     );

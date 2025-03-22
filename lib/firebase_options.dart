@@ -65,5 +65,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'cruceschessclub-d09a7.firebasestorage.app',
     iosBundleId: 'com.example.cccMobile',
   );
-
 }

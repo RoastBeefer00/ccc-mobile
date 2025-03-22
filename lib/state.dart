@@ -12,19 +12,19 @@ class MyAppState extends ChangeNotifier {
   // }
 
   void getNext() {
-      current = WordPair.random();
-      notifyListeners();
+    current = WordPair.random();
+    notifyListeners();
   }
 
   var favorites = <WordPair>[];
 
   void toggleFavorite() {
-      if (favorites.contains(current)) {
-          favorites.remove(current);
-      } else {
-          favorites.add(current);
-      }
-      notifyListeners();
+    if (favorites.contains(current)) {
+      favorites.remove(current);
+    } else {
+      favorites.add(current);
+    }
+    notifyListeners();
   }
 
   void removeFavorite(WordPair fav) {

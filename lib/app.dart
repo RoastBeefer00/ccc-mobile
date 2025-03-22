@@ -17,45 +17,65 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (selectedIndex) {
       case 0:
         page = GeneratorPage();
-        // break;
+      // break;
       case 1:
         page = FavoritesPage();
-        // break;
+      // break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
     void _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
+      setState(() {
+        selectedIndex = index;
+      });
+    }
 
     var destinations = [
-        NavigationDestination(icon: Icon(Icons.home, color: Theme.of(context).colorScheme.onPrimary), label: "Home"),
-        NavigationDestination(icon: Icon(Icons.people, color: Theme.of(context).colorScheme.onPrimary), label: "About Us"),
-        NavigationDestination(icon: Icon(Icons.calendar_month, color: Theme.of(context).colorScheme.onPrimary), label: "Schedule"),
+      NavigationDestination(
+        icon: Icon(Icons.home, color: Theme.of(context).colorScheme.onPrimary),
+        label: "Home",
+      ),
+      NavigationDestination(
+        icon: Icon(
+          Icons.people,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+        label: "About Us",
+      ),
+      NavigationDestination(
+        icon: Icon(
+          Icons.calendar_month,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+        label: "Schedule",
+      ),
     ];
-    
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final theme = Theme.of(context);
         return Scaffold(
           appBar: AppBar(
-           title: Text("Cruces Chess Club", style: theme.textTheme.headlineSmall!.copyWith(color: theme.colorScheme.onPrimary),), 
-           backgroundColor: Theme.of(context).colorScheme.primary,
-           // leading: Builder(builder: (context) {
-           //     return IconButton(
-           //      icon: Icon(Icons.menu, color: theme.colorScheme.onPrimary,),
-           //      onPressed: () {
-           //          Scaffold.of(context).openDrawer();
-           //      },
-           //     );
-           // }),
+            title: Text(
+              "Cruces Chess Club",
+              style: theme.textTheme.headlineSmall!.copyWith(
+                color: theme.colorScheme.onPrimary,
+              ),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            // leading: Builder(builder: (context) {
+            //     return IconButton(
+            //      icon: Icon(Icons.menu, color: theme.colorScheme.onPrimary,),
+            //      onPressed: () {
+            //          Scaffold.of(context).openDrawer();
+            //      },
+            //     );
+            // }),
           ),
           body: Center(
             child: Container(
               color: Theme.of(context).colorScheme.primaryContainer,
-            child: page,
+              child: page,
             ),
           ),
           bottomNavigationBar: NavigationBarTheme(
@@ -63,8 +83,9 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: Theme.of(context).colorScheme.primary,
               indicatorColor: Theme.of(context).colorScheme.secondary,
               labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-        (Set<MaterialState> states) => theme.textTheme.labelSmall!.copyWith(color: theme.colorScheme.onPrimary),
-      ),
+                (Set<MaterialState> states) => theme.textTheme.labelSmall!
+                    .copyWith(color: theme.colorScheme.onPrimary),
+              ),
             ),
             child: NavigationBar(
               onDestinationSelected: (int index) {
@@ -73,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
               // backgroundColor: Theme.of(context).colorScheme.primary,
               // indicatorColor: Theme.of(context).colorScheme.tertiary,
               selectedIndex: selectedIndex,
-              destinations: destinations
+              destinations: destinations,
             ),
           ),
           // drawer: Drawer(
@@ -119,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
           //   ),
           // ),
         );
-      }
+      },
     );
   }
 }
