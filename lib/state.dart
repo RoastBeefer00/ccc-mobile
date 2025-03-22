@@ -1,8 +1,15 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import './widgets/schedule.dart';
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+  // late Future<ClubEvent> schedule;
+  //
+  // void setSchedule() {
+  //   // super.initState();
+  //   schedule = fetchSchedule();
+  // }
 
   void getNext() {
       current = WordPair.random();
