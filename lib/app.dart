@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './pages/home.dart';
 import './pages/about.dart';
-import './widgets/schedule.dart';
+import './state.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -12,11 +13,20 @@ class _MyHomePageState extends State<MyHomePage> {
   var selectedIndex = 0;
 
   @override
+      initState() {
+          super.initState();
+          var appState = context.read<MyAppState>();
+          appState.updateSchedule();
+      }
+
+  @override
   Widget build(BuildContext context) {
+    // var appState = context.watch<MyAppState>();
+    // appState.updateSchedule();
     Widget page;
     switch (selectedIndex) {
       case 0:
-        page = GeneratorPage();
+        page = HomePage();
       // break;
       case 1:
         page = FavoritesPage();
@@ -59,10 +69,10 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text(
               "Cruces Chess Club",
               style: theme.textTheme.headlineSmall!.copyWith(
-                color: theme.colorScheme.onPrimary,
+                color: theme.colorScheme.onPrimaryContainer,
               ),
             ),
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             // leading: Builder(builder: (context) {
             //     return IconButton(
             //      icon: Icon(Icons.menu, color: theme.colorScheme.onPrimary,),
@@ -74,17 +84,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           body: Center(
             child: Container(
-              color: Theme.of(context).colorScheme.primaryContainer,
+              color: Theme.of(context).colorScheme.primary,
               child: page,
             ),
           ),
           bottomNavigationBar: NavigationBarTheme(
             data: NavigationBarThemeData(
-              backgroundColor: Theme.of(context).colorScheme.primary,
+              backgroundColor: Theme.of(context).colorScheme.primaryContainer,
               indicatorColor: Theme.of(context).colorScheme.secondary,
               labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
                 (Set<MaterialState> states) => theme.textTheme.labelSmall!
-                    .copyWith(color: theme.colorScheme.onPrimary),
+                    .copyWith(color: theme.colorScheme.onPrimaryContainer),
               ),
             ),
             child: NavigationBar(

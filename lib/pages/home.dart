@@ -5,11 +5,17 @@ import '../widgets/big_card.dart';
 import '../widgets/schedule.dart';
 import '../state.dart';
 
-class GeneratorPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // var appState = context.watch<MyAppState>();
-    var schedule = fetchSchedule();
+    var appState = context.watch<MyAppState>();
+    // appState.updateSchedule();
+    var events = appState.clubEvents;
+    print("events: $events");
+    // var date = DateTime.now();
+    // var start = getFirstDayOfTheMonth(date);
+    // var end = getLastDayOfTheMonth(date);
+    // var schedule = fetchSchedule(start, end);
 
     // IconData icon;
     // if (appState.favorites.contains(pair)) {
@@ -19,31 +25,14 @@ class GeneratorPage extends StatelessWidget {
     // }
 
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          FutureBuilder<List<ClubEvent>>(
-            future: schedule,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView(
-                  children: [
-                    for (var event in snapshot.data!)
-                      ListTile(
-                        title: BigCard(name: event.name, date: event.date),
-                      ),
-                  ],
-                );
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
-            },
-          ),
-        ],
-      ),
+        child: ListView(
+            children: [
+            for (var event in events)
+            ListTile(
+                title: EventCard(name: event.name, date: event.date ,location: event.location),
+                ),
+            ],
+        )
     );
   }
 }

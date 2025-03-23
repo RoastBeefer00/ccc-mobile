@@ -14,27 +14,9 @@ class FavoritesPage extends StatelessWidget {
       color: theme.colorScheme.onPrimary,
     );
     var appState = context.watch<MyAppState>();
-    if (appState.favorites.isEmpty) {
-      return Center(child: Text("No favorites yet."));
-    }
-    return ListView(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: Text(
-            "You have ${appState.favorites.length} favorites:",
-            style: headerStyle,
-          ),
-        ),
-        for (var fav in appState.favorites)
-          ListTile(
-            leading: Icon(Icons.favorite),
-            title: Text(fav.asLowerCase, style: listStyle),
-            onTap: () {
-              appState.removeFavorite(fav);
-            },
-          ),
-      ],
-    );
+    // if (appState.favorites.isEmpty) {
+    //   return Center(child: Text("No favorites yet."));
+    // }
+    return Text("we are people");
   }
 }
