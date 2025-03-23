@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maps_launcher/maps_launcher.dart';
 
 class EventCard extends StatelessWidget {
   const EventCard({super.key, required this.name, required this.date, required this.location});
@@ -10,13 +11,13 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final nameStyle = theme.textTheme.titleLarge!.copyWith(
+    final nameStyle = theme.textTheme.headlineMedium!.copyWith(
       color: theme.colorScheme.onPrimaryContainer,
     );
-    final numStyle = theme.textTheme.displaySmall!.copyWith(
+    final numStyle = theme.textTheme.titleLarge!.copyWith(
       color: theme.colorScheme.onPrimaryContainer,
     );
-    final monthStyle = theme.textTheme.labelMedium!.copyWith(
+    final monthStyle = theme.textTheme.titleMedium!.copyWith(
       color: theme.colorScheme.onPrimaryContainer,
     );
     final locationStyle = theme.textTheme.labelMedium!.copyWith(
@@ -24,26 +25,34 @@ class EventCard extends StatelessWidget {
     );
 
     return Card(
+      elevation: 5,
       color: theme.colorScheme.primaryContainer,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Row(
+      child: ListTile(
+        leading: Container(
+          width: 100,
+          child: Column(
+            children: [
+              Text("${date.day}", style: numStyle),
+              Text(monthAsString(date.month), style: monthStyle),
+            ],
+          ),
+        ),
+        title: Text(name, style: nameStyle),
+        subtitle: Column(
           children: [
-            Column(
-              children: [
-                Text("${date.day}", style: numStyle),
-                Text(monthAsString(date.month), style: monthStyle),
-              ],
-            ),
-            Column(
-              children: [
-                Text(name, style: nameStyle),
-                if (location != null)
-                    Text(location!, style: locationStyle),
-              ],
-            ),
+          if (location != null)
+            Text(location!, style: locationStyle),
           ],
         ),
+      trailing: (location != null) ? ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: theme.colorScheme.secondary,
+          foregroundColor: theme.colorScheme.onSecondary,
+        ),
+        onPressed: (){
+        MapsLauncher.launchQuery(location!);
+          }, 
+        child: Icon(Icons.directions)) : null
       ),
     );
   }

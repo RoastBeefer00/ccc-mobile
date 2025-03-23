@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './pages/home.dart';
 import './pages/about.dart';
+import './pages/schedule.dart';
 import './state.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -30,6 +31,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // break;
       case 1:
         page = FavoritesPage();
+      case 2:
+        page = SchedulePage();
       // break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
@@ -42,20 +45,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var destinations = [
       NavigationDestination(
-        icon: Icon(Icons.home, color: Theme.of(context).colorScheme.onPrimary),
+        icon: Icon(
+            Icons.home, 
+            color: (selectedIndex == 0) ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onPrimaryContainer,
+        ),
         label: "Home",
       ),
       NavigationDestination(
         icon: Icon(
           Icons.people,
-          color: Theme.of(context).colorScheme.onPrimary,
+            color: (selectedIndex == 1) ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         label: "About Us",
       ),
       NavigationDestination(
         icon: Icon(
           Icons.calendar_month,
-          color: Theme.of(context).colorScheme.onPrimary,
+            color: (selectedIndex == 2) ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         label: "Schedule",
       ),

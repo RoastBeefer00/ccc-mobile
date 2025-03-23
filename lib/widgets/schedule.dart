@@ -48,10 +48,56 @@ Future<List<ClubEvent>> fetchSchedule(DateTime start, DateTime end) async {
   final endDate = end.toIso8601String();
   final response = await http.get(
     Uri.parse(
-      // "https://www.googleapis.com/calendar/v3/calendars/cruceschessclub@gmail.com/events?key=$apiKey&timeMin=${startDate}Z&timeMax=${endDate}Z",
-      "https://www.googleapis.com/calendar/v3/calendars/cruceschessclub@gmail.com/events?key=$apiKey",
+      "https://www.googleapis.com/calendar/v3/calendars/cruceschessclub@gmail.com/events?key=$apiKey&timeMin=${startDate}Z&timeMax=${endDate}Z",
     ),
   );
+  var events = <ClubEvent>[];
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    var json = jsonDecode(response.body) as Map<String, dynamic>;
+    for (var item in json['items']) {
+        if (item['start']['dateTime'] == null) {
+            continue;
+        }
+        if (item['recurrence'] != null) {
+            var recurringEvents = await getRecurringEvents(start, end, item['id']);
+            events.addAll(recurringEvents);
+            continue;
+        }
+      var event = ClubEvent.fromJson(item);
+      if (event.date.isAfter(start) && event.date.isBefore(end)) {
+        events.add(event);
+      }
+    }
+    events.sort((a, b) => a.date.compareTo(b.date));
+    return events;
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception(
+      'Error: ${response.statusCode}.  Please check your internet connection.',
+    );
+  }
+}
+
+Future<List<ClubEvent>> getRecurringEvents(DateTime start, DateTime end, String eventId) async {
+  const androidApiKey = String.fromEnvironment(
+    'ANDROID_API_KEY',
+    defaultValue: 'SOME_DEFAULT_VALUE',
+  );
+  const iosApiKey = String.fromEnvironment(
+    'IOS_API_KEY',
+    defaultValue: 'SOME_DEFAULT_VALUE',
+  );
+  final apiKey = Platform.isAndroid ? androidApiKey : iosApiKey;
+  final startDate = start.toIso8601String();
+  final endDate = end.toIso8601String();
+  final response = await http.get(
+    Uri.parse(
+    "https://www.googleapis.com/calendar/v3/calendars/cruceschessclub@gmail.com/events/$eventId/instances?key=$apiKey&timeMin=${startDate}Z&timeMax=${endDate}Z"
+    ));
   var events = <ClubEvent>[];
 
   if (response.statusCode == 200) {

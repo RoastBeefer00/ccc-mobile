@@ -1,9 +1,8 @@
-import 'package:ccc_mobile/widgets/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/big_card.dart';
-import '../widgets/schedule.dart';
+import '../widgets/event.dart';
 import '../state.dart';
+import '../widgets/schedule.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -11,28 +10,24 @@ class HomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     // appState.updateSchedule();
     var events = appState.clubEvents;
-    print("events: $events");
-    // var date = DateTime.now();
-    // var start = getFirstDayOfTheMonth(date);
-    // var end = getLastDayOfTheMonth(date);
-    // var schedule = fetchSchedule(start, end);
+    final nextEvent =  getNextEvent(events);
 
-    // IconData icon;
-    // if (appState.favorites.contains(pair)) {
-    //   icon = Icons.favorite;
-    // } else {
-    //   icon = Icons.favorite_border;
-    // }
+    final welcomeStyle = Theme.of(context).textTheme.headlineLarge!.copyWith(
+        color: Theme.of(context).colorScheme.onPrimary,
+    );
 
     return Center(
-        child: ListView(
-            children: [
-            for (var event in events)
-            ListTile(
-                title: EventCard(name: event.name, date: event.date ,location: event.location),
-                ),
-            ],
-        )
+        child:  Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text("Our next meeting will be at...", style: welcomeStyle),
+            ),
+            EventCard(name: nextEvent.name, date: nextEvent.date ,location: nextEvent.location),
+            Text("We hope to see you there!", style: welcomeStyle),
+          ],
+        ),
     );
   }
 }
