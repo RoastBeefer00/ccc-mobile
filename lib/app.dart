@@ -14,11 +14,11 @@ class _MyHomePageState extends State<MyHomePage> {
   var selectedIndex = 0;
 
   @override
-      initState() {
-          super.initState();
-          var appState = context.read<MyAppState>();
-          appState.updateSchedule();
-      }
+  initState() {
+    super.initState();
+    var appState = context.read<MyAppState>();
+    appState.updateSchedule();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,22 +46,31 @@ class _MyHomePageState extends State<MyHomePage> {
     var destinations = [
       NavigationDestination(
         icon: Icon(
-            Icons.home, 
-            color: (selectedIndex == 0) ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onPrimaryContainer,
+          Icons.home,
+          color:
+              (selectedIndex == 0)
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         label: "Home",
       ),
       NavigationDestination(
         icon: Icon(
           Icons.people,
-            color: (selectedIndex == 1) ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onPrimaryContainer,
+          color:
+              (selectedIndex == 1)
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         label: "About Us",
       ),
       NavigationDestination(
         icon: Icon(
           Icons.calendar_month,
-            color: (selectedIndex == 2) ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.onPrimaryContainer,
+          color:
+              (selectedIndex == 2)
+                  ? Theme.of(context).colorScheme.onPrimary
+                  : Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         label: "Schedule",
       ),

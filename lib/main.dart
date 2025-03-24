@@ -20,14 +20,15 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  // final MyAppState appState = MyAppState();
-  // await appState.updateSchedule();
-  // print(appState.clubEvents);
-  runApp(const MyApp());
+  var date = DateTime.now();
+  var start = getFirstDayOfTheMonth(date);
+  var end = getLastDayOfTheMonth(DateTime(date.year, date.month + 2, 1));
+  final appState = await fetchSchedule(start, end);
+  runApp(Provider.value(value: appState, child: MyApp()));
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');

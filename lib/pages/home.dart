@@ -10,24 +10,31 @@ class HomePage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     // appState.updateSchedule();
     var events = appState.clubEvents;
-    final nextEvent =  getNextEvent(events);
+    final nextEvent = getNextEvent(events);
+    var theme = Theme.of(context);
 
     final welcomeStyle = Theme.of(context).textTheme.headlineLarge!.copyWith(
-        color: Theme.of(context).colorScheme.onPrimary,
+      color: Theme.of(context).colorScheme.onPrimary,
     );
 
     return Center(
-        child:  Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text("Our next meeting will be at...", style: welcomeStyle),
-            ),
-            EventCard(name: nextEvent.name, date: nextEvent.date ,location: nextEvent.location),
-            Text("We hope to see you there!", style: welcomeStyle),
-          ],
-        ),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text("Our next meeting will be at...", style: welcomeStyle),
+          ),
+          (nextEvent != null)
+              ? EventCard(
+                name: nextEvent.name,
+                date: nextEvent.date,
+                location: nextEvent.location,
+              )
+              : CircularProgressIndicator(color: theme.colorScheme.onPrimary),
+          Text("We hope to see you there!", style: welcomeStyle),
+        ],
+      ),
     );
   }
 }

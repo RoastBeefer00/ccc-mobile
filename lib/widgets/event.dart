@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 
 class EventCard extends StatelessWidget {
-  const EventCard({super.key, required this.name, required this.date, required this.location});
+  const EventCard({
+    super.key,
+    required this.name,
+    required this.date,
+    required this.location,
+  });
 
   final String name;
   final DateTime date;
@@ -13,6 +18,7 @@ class EventCard extends StatelessWidget {
     final theme = Theme.of(context);
     final nameStyle = theme.textTheme.headlineMedium!.copyWith(
       color: theme.colorScheme.onPrimaryContainer,
+      fontWeight: FontWeight.bold,
     );
     final numStyle = theme.textTheme.titleLarge!.copyWith(
       color: theme.colorScheme.onPrimaryContainer,
@@ -37,22 +43,30 @@ class EventCard extends StatelessWidget {
             ],
           ),
         ),
-        title: Text(name, style: nameStyle),
-        subtitle: Column(
+        title: Column(
           children: [
-          if (location != null)
-            Text(location!, style: locationStyle),
+            Text(name, style: nameStyle),
+            Divider(color: theme.colorScheme.onPrimaryContainer),
           ],
         ),
-      trailing: (location != null) ? ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: theme.colorScheme.secondary,
-          foregroundColor: theme.colorScheme.onSecondary,
+        subtitle: Column(
+          children: [
+            if (location != null) Text(location!, style: locationStyle),
+          ],
         ),
-        onPressed: (){
-        MapsLauncher.launchQuery(location!);
-          }, 
-        child: Icon(Icons.directions)) : null
+        trailing:
+            (location != null)
+                ? ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: theme.colorScheme.secondary,
+                    foregroundColor: theme.colorScheme.onSecondary,
+                  ),
+                  onPressed: () {
+                    MapsLauncher.launchQuery(location!);
+                  },
+                  child: Icon(Icons.directions),
+                )
+                : null,
       ),
     );
   }

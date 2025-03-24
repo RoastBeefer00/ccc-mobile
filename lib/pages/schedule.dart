@@ -1,37 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/event.dart';
+import '../widgets/month.dart';
 import '../state.dart';
 
-class SchedulePage extends StatelessWidget {
+class SchedulePage extends StatefulWidget {
+  @override
+  State<SchedulePage> createState() => _SchedulePageState();
+}
+
+class _SchedulePageState extends State<SchedulePage> {
+  var selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    // appState.updateSchedule();
     var events = appState.clubEvents;
-    print("events: $events");
-    // var date = DateTime.now();
-    // var start = getFirstDayOfTheMonth(date);
-    // var end = getLastDayOfTheMonth(date);
-    // var schedule = fetchSchedule(start, end);
+    var months = getMonths(events);
+    var month = months[selectedIndex];
+    var theme = Theme.of(context);
 
-    // IconData icon;
-    // if (appState.favorites.contains(pair)) {
-    //   icon = Icons.favorite;
-    // } else {
-    //   icon = Icons.favorite_border;
-    // }
+    void onItemTapped(int index) {
+      setState(() {
+        selectedIndex = index;
+      });
+    }
 
     return Center(
-        child: ListView(
+      child: Column(
+        children: [
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 20,
             children: [
-            for (var event in events)
-            ListTile(
-                title: EventCard(name: event.name, date: event.date ,location: event.location),
+              for (var i = 0; i < months.length; i++)
+                ElevatedButton(
+                  onPressed: () {
+                    onItemTapped(i);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor:
+                        i == selectedIndex
+                            ? theme.colorScheme.onPrimaryContainer
+                            : theme.colorScheme.onSecondary,
+                    backgroundColor:
+                        i == selectedIndex
+                            ? theme.colorScheme.primaryContainer
+                            : theme.colorScheme.secondary,
+                  ),
+                  child: Text(months[i].name),
                 ),
             ],
-        )
+          ),
+          Expanded(
+            child: ListView(
+              children: [
+                for (var event in month.events)
+                  ListTile(
+                    title: EventCard(
+                      name: event.name,
+                      date: event.date,
+                      location: event.location,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
