@@ -14,15 +14,20 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // make sure you call `initializeApp` before using other Firebase services.
   // await Firebase.initializeApp();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  final notificationSettings = await FirebaseMessaging.instance
-      .requestPermission(provisional: true);
 
   print("Handling a background message: ${message.messageId}");
+  print("Handling a background message: ${message.data}");
+  // await updateState(context);
 }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  final notificationSettings = await FirebaseMessaging.instance
+      .requestPermission(provisional: true);
+  await FirebaseMessaging.instance.subscribeToTopic("calendar");
+  print("subscribed to calendar topic");
 
   var date = DateTime.now();
   var start = getFirstDayOfTheMonth(date);

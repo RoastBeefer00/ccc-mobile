@@ -1,6 +1,10 @@
+import 'package:ccc_mobile/state.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io' show Platform;
+
+import 'package:provider/provider.dart';
 
 class ClubEvent {
   final String name;
@@ -119,6 +123,16 @@ Future<List<ClubEvent>> getRecurringEvents(
       'Error: ${response.statusCode}.  Please check your internet connection.',
     );
   }
+}
+
+Future<void> updateState(BuildContext context) async {
+  final appState = context.read()<MyAppState>();
+  var date = DateTime.now();
+  var start = getFirstDayOfTheMonth(date);
+  var end = getLastDayOfTheMonth(DateTime(date.year, date.month + 2, 1));
+  final schedule = await fetchSchedule(start, end);
+  appState.clubEvents = schedule;
+  print("updated state");
 }
 
 DateTime getFirstDayOfTheMonth(DateTime date) {
