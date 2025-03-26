@@ -17,13 +17,13 @@ class ClubEvent {
     if (json['location'] == null) {
       return ClubEvent(
         name: json['summary'] as String,
-        date: DateTime.parse(json['start']['dateTime'] as String),
+        date: DateTime.parse(json['start']['dateTime'] as String).toLocal(),
         location: null,
       );
     } else {
       return ClubEvent(
         name: json['summary'] as String,
-        date: DateTime.parse(json['start']['dateTime'] as String),
+        date: DateTime.parse(json['start']['dateTime'] as String).toLocal(),
         location: json['location'] as String,
       );
     }

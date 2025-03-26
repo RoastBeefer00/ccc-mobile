@@ -18,6 +18,9 @@ class _SchedulePageState extends State<SchedulePage> {
     var events = appState.clubEvents;
     var months = getMonths(events);
     var month = months[selectedIndex];
+    for (var event in month.events) {
+      print(event.name);
+    }
     var theme = Theme.of(context);
 
     void onItemTapped(int index) {

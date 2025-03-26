@@ -8,6 +8,8 @@ import './app.dart';
 import './state.dart';
 import './widgets/schedule.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -18,6 +20,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
   print("Handling a background message: ${message.data}");
   // await updateState(context);
+    var state = MyAppState();
+    await state.updateSchedule();
 }
 
 Future<void> main() async {
@@ -42,6 +46,12 @@ Future<void> main() async {
     if (message.notification != null) {
       print('Message also contained a notification: ${message.notification}');
     }
+
+    final context = navigatorKey.currentContext;
+    if (context != null) {
+      final appState = Provider.of<MyAppState>(context, listen: false);
+      appState.updateSchedule();
+    }
   });
 }
 
@@ -53,6 +63,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         title: 'Cruces Chess Club',
         theme: ThemeData(
           useMaterial3: true,
