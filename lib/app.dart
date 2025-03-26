@@ -10,7 +10,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   var selectedIndex = 0;
 
   @override
@@ -18,6 +18,19 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     var appState = context.read<MyAppState>();
     appState.updateSchedule();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("app state changed: $state");
+    // This method is called when the app's lifecycle state changes
+    if (state == AppLifecycleState.resumed) {
+        print("app resumed");
+      // Update state or perform actions when the app is resumed
+      var appState = context.read<MyAppState>();
+      appState.updateSchedule();
+    }
   }
 
   @override
