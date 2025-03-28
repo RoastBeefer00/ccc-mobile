@@ -17,6 +17,40 @@ class FavoritesPage extends StatelessWidget {
     // if (appState.favorites.isEmpty) {
     //   return Center(child: Text("No favorites yet."));
     // }
-    return Text("we are people");
+    return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Cruces Chess Club is a local non-profit organization.  We meet every Wednesday at 7pm at a different location each week."),
+            SizedBox(height: 10),
+            Text(
+              "Our Mission",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                color: Colors.blueGrey[700],
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Our mission is to foster a vibrant and inclusive community centered around the enjoyment of chess. "
+              "We are dedicated to supporting our members by providing high-quality chess boards, timers, and resources, "
+              "while also empowering them to participate in competitions and travel to events.",
+              style: TextStyle(
+                fontSize: 16,
+                height: 1.5,
+                color: Colors.grey[800],
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(children: [
+                Icon(Icons.picture_in_picture),
+                Icon(Icons.facebook),
+                Icon(Icons.web)
+            ],)
+          ],
+        ),
+      );      
   }
 }
