@@ -1,27 +1,16 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import './widgets/schedule.dart';
 
 class MyAppState extends ChangeNotifier {
-  var current = WordPair.random();
-
-  void getNext() {
-      current = WordPair.random();
-      notifyListeners();
-  }
-
-  var favorites = <WordPair>[];
-
-  void toggleFavorite() {
-      if (favorites.contains(current)) {
-          favorites.remove(current);
-      } else {
-          favorites.add(current);
-      }
-      notifyListeners();
-  }
-
-  void removeFavorite(WordPair fav) {
-    favorites.remove(fav);
+  var clubEvents = <ClubEvent>[];
+  // late Future<ClubEvent> schedule;
+  //
+  Future<void> updateSchedule() async {
+    var date = DateTime.now();
+    var start = getFirstDayOfTheMonth(date);
+    var end = getLastDayOfTheMonth(DateTime(date.year, date.month + 2, 1));
+    print('start: $start, end: $end');
+    clubEvents = await fetchSchedule(start, end);
     notifyListeners();
   }
 }

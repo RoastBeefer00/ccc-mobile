@@ -1,46 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/big_card.dart';
+import '../widgets/event.dart';
 import '../state.dart';
+import '../widgets/schedule.dart';
 
-class GeneratorPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    var pair = appState.current;
+    // appState.updateSchedule();
+    var events = appState.clubEvents;
+    final nextEvent = getNextEvent(events);
+    var theme = Theme.of(context);
 
-    IconData icon;
-    if (appState.favorites.contains(pair)) {
-      icon = Icons.favorite;
-    } else {
-      icon = Icons.favorite_border;
-    }
+    final welcomeStyle = Theme.of(context).textTheme.headlineLarge!.copyWith(
+      color: Theme.of(context).colorScheme.onPrimary,
+    );
 
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BigCard(pair: pair),
-          SizedBox(height: 10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ElevatedButton.icon(
-                onPressed: () {
-                  appState.toggleFavorite();
-                },
-                icon: Icon(icon),
-                label: Text('Like'),
-              ),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  appState.getNext();
-                },
-                child: Text('Next'),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text("Our next meeting will be at...", style: welcomeStyle),
           ),
+          (nextEvent != null)
+              ? EventCard(
+                name: nextEvent.name,
+                date: nextEvent.date,
+                location: nextEvent.location,
+              )
+              : CircularProgressIndicator(color: theme.colorScheme.onPrimary),
+          Text("We hope to see you there!", style: welcomeStyle),
         ],
       ),
     );
