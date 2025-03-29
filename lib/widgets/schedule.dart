@@ -5,6 +5,11 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:provider/provider.dart';
+import '../firebase_options.dart';
+
+var androidApiKey = DefaultFirebaseOptions.android.apiKey;
+var iosApiKey = DefaultFirebaseOptions.ios.apiKey;
+final apiKey = Platform.isAndroid ? androidApiKey : iosApiKey;
 
 class ClubEvent {
   final String name;
@@ -31,15 +36,6 @@ class ClubEvent {
 }
 
 Future<List<ClubEvent>> fetchSchedule(DateTime start, DateTime end) async {
-  const androidApiKey = String.fromEnvironment(
-    'ANDROID_API_KEY',
-    defaultValue: 'SOME_DEFAULT_VALUE',
-  );
-  const iosApiKey = String.fromEnvironment(
-    'IOS_API_KEY',
-    defaultValue: 'SOME_DEFAULT_VALUE',
-  );
-  final apiKey = Platform.isAndroid ? androidApiKey : iosApiKey;
   final startDate = start.toIso8601String();
   final endDate = end.toIso8601String();
   final response = await http.get(
@@ -83,15 +79,6 @@ Future<List<ClubEvent>> getRecurringEvents(
   DateTime end,
   String eventId,
 ) async {
-  const androidApiKey = String.fromEnvironment(
-    'ANDROID_API_KEY',
-    defaultValue: 'SOME_DEFAULT_VALUE',
-  );
-  const iosApiKey = String.fromEnvironment(
-    'IOS_API_KEY',
-    defaultValue: 'SOME_DEFAULT_VALUE',
-  );
-  final apiKey = Platform.isAndroid ? androidApiKey : iosApiKey;
   final startDate = start.toIso8601String();
   final endDate = end.toIso8601String();
   final response = await http.get(
