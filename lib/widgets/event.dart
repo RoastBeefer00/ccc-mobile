@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import '../colors.dart';
 
 class EventCard extends StatelessWidget {
   const EventCard({
@@ -17,7 +18,7 @@ class EventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final nameStyle = theme.textTheme.headlineMedium!.copyWith(
-      color: theme.colorScheme.onPrimaryContainer,
+      color: ThemeColors.whitesOffWhite,
       fontWeight: FontWeight.bold,
     );
     final numStyle = theme.textTheme.titleLarge!.copyWith(
@@ -27,12 +28,12 @@ class EventCard extends StatelessWidget {
       color: theme.colorScheme.onPrimaryContainer,
     );
     final locationStyle = theme.textTheme.labelMedium!.copyWith(
-      color: theme.colorScheme.onPrimaryContainer,
+      color: ThemeColors.graysText,
     );
 
     return Card(
       elevation: 5,
-      color: theme.colorScheme.primaryContainer,
+      color: ThemeColors.greensPrimary,
       child: ListTile(
         leading: Container(
           width: 100,
@@ -58,8 +59,8 @@ class EventCard extends StatelessWidget {
             (location != null)
                 ? ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: theme.colorScheme.secondary,
-                    foregroundColor: theme.colorScheme.onSecondary,
+                    backgroundColor: ThemeColors.greensLight,
+                    foregroundColor: ThemeColors.blacksText,
                   ),
                   onPressed: () {
                     MapsLauncher.launchQuery(location!);
@@ -100,5 +101,36 @@ String monthAsString(int month) {
       return "Dec";
     default:
       throw UnimplementedError("monthAsString($month)");
+  }
+}
+
+String monthAsStringLong(int month) {
+  switch (month) {
+    case 1:
+      return "January";
+    case 2:
+      return "February";
+    case 3:
+      return "March";
+    case 4:
+      return "April";
+    case 5:
+      return "May";
+    case 6:
+      return "June";
+    case 7:
+      return "July";
+    case 8:
+      return "August";
+    case 9:
+      return "September";
+    case 10:
+      return "October";
+    case 11:
+      return "November";
+    case 12:
+      return "December";
+    default:
+      throw UnimplementedError("monthAsStringLong($month)");
   }
 }
