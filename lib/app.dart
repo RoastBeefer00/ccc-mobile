@@ -59,9 +59,10 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       NavigationDestination(
         icon: Icon(
           Icons.home,
+          size: 30,
           color:
               (selectedIndex == 0)
-                  ? ThemeColors.chessGreen
+                  ? ThemeColors.greensPrimary
                   : ThemeColors.chessTan,
         ),
         label: "Home",
@@ -69,9 +70,10 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       NavigationDestination(
         icon: Icon(
           Icons.people,
+          size: 30,
           color:
               (selectedIndex == 1)
-                  ? ThemeColors.chessGreen
+                  ? ThemeColors.greensPrimary
                   : ThemeColors.chessTan,
         ),
         label: "About Us",
@@ -79,9 +81,10 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       NavigationDestination(
         icon: Icon(
           Icons.calendar_month,
+          size: 30,
           color:
               (selectedIndex == 2)
-                  ? ThemeColors.chessGreen
+                  ? ThemeColors.greensPrimary
                   : ThemeColors.chessTan,
         ),
         label: "Schedule",
@@ -93,27 +96,26 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         final theme = Theme.of(context);
         return Scaffold(
           appBar: AppBar(
-            title: Text(
-              "Cruces Chess Club",
-              style: theme.textTheme.headlineSmall!.copyWith(
-                color: ThemeColors.chessTan,
+            title: Center(
+              child: Text(
+                "Cruces Chess Club",
+              style: TextStyle(fontFamily: 'Lora', fontSize: 32, color: ThemeColors.whitesOffWhite),
               ),
             ),
-            backgroundColor: ThemeColors.chessGreen,
+            backgroundColor: ThemeColors.chessBlack,
           ),
           body: Center(
             child: Container(
-              color: ThemeColors.chessTan,
+              color: ThemeColors.graysBackground,
               child: page,
             ),
           ),
           bottomNavigationBar: NavigationBarTheme(
             data: NavigationBarThemeData(
-              backgroundColor: ThemeColors.chessGreen,
-              indicatorColor: ThemeColors.greensLight,
+            backgroundColor: ThemeColors.chessBlack,
+              indicatorColor: ThemeColors.whitesOffWhite,
               labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
-                (Set<MaterialState> states) => theme.textTheme.labelSmall!
-                    .copyWith(color: ThemeColors.greensLight),
+                (Set<MaterialState> states) => TextStyle(color: ThemeColors.whitesOffWhite, fontSize: 16)              
               ),
             ),
             child: NavigationBar(

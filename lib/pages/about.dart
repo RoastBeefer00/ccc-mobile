@@ -2,21 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../state.dart';
+import '../colors.dart';
 
 class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final headerStyle = theme.textTheme.displayMedium!.copyWith(
-      color: theme.colorScheme.onPrimary,
-    );
-    final listStyle = theme.textTheme.displaySmall!.copyWith(
-      color: theme.colorScheme.onPrimary,
-    );
-    var appState = context.watch<MyAppState>();
-    // if (appState.favorites.isEmpty) {
-    //   return Center(child: Text("No favorites yet."));
-    // }
     return Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -28,8 +18,8 @@ class FavoritesPage extends StatelessWidget {
               "Our Mission",
               style: TextStyle(
                 fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Colors.blueGrey[700],
+                fontWeight: FontWeight.w700,
+                color: ThemeColors.greensDarkest,
               ),
             ),
             SizedBox(height: 10),
@@ -44,10 +34,12 @@ class FavoritesPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            Row(children: [
-                Icon(Icons.picture_in_picture),
-                Icon(Icons.facebook),
-                Icon(Icons.web)
+            Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.picture_in_picture, color: ThemeColors.greensDarkest, size: 30,),
+                Icon(Icons.facebook, color: ThemeColors.greensDarkest, size: 30,),
+                Icon(Icons.web, color: ThemeColors.greensDarkest, size: 30,)
             ],)
           ],
         ),

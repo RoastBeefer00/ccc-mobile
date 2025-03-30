@@ -16,60 +16,89 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final nameStyle = theme.textTheme.headlineMedium!.copyWith(
-      color: ThemeColors.whitesOffWhite,
-      fontWeight: FontWeight.bold,
-    );
-    final numStyle = theme.textTheme.titleLarge!.copyWith(
-      color: theme.colorScheme.onPrimaryContainer,
-    );
-    final monthStyle = theme.textTheme.titleMedium!.copyWith(
-      color: theme.colorScheme.onPrimaryContainer,
-    );
-    final locationStyle = theme.textTheme.labelMedium!.copyWith(
-      color: ThemeColors.graysText,
-    );
-
-    return Card(
-      elevation: 5,
-      color: ThemeColors.greensPrimary,
-      child: ListTile(
-        leading: Container(
-          width: 100,
-          child: Column(
-            children: [
-              Text("${date.day}", style: numStyle),
-              Text(monthAsString(date.month), style: monthStyle),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Container(
+          decoration: BoxDecoration(
+            color: ThemeColors.whitesOffWhite,
+            borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: ThemeColors.greensDark,
+              offset: Offset(0, 2),
+              blurRadius: 2,
+            ),
+          ],
           ),
-        ),
-        title: Column(
-          children: [
-            Text(name, style: nameStyle),
-            Divider(color: theme.colorScheme.onPrimaryContainer),
-          ],
-        ),
-        subtitle: Column(
-          children: [
-            if (location != null) Text(location!, style: locationStyle),
-          ],
-        ),
-        trailing:
-            (location != null)
-                ? ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ThemeColors.greensLight,
-                    foregroundColor: ThemeColors.blacksText,
-                  ),
-                  onPressed: () {
-                    MapsLauncher.launchQuery(location!);
-                  },
-                  child: Icon(Icons.directions),
-                )
-                : null,
+          child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    Text("${monthAsStringLong(date.month)} 13th, 7:00pm", style: TextStyle(color: ThemeColors.blacksText, fontSize: 16, fontWeight: FontWeight.w500)),
+                    Text("Amaro Winery", style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: ThemeColors.greensDarkest)),
+                    Divider(color: ThemeColors.greensDarkest, thickness: 2,),
+                    if (location != null) InkWell(
+                      highlightColor: ThemeColors.greensDark,
+                      hoverColor: ThemeColors.greensDark,
+                      splashColor: ThemeColors.greensDark,
+                      focusColor: ThemeColors.greensDark,
+                      onTap: () {
+                        MapsLauncher.launchQuery(location!);
+                      },
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          // SizedBox(width: 8),
+                          Flexible(child: Text(location!, style: TextStyle(color: ThemeColors.blacksText, fontSize: 16, fontWeight: FontWeight.w500), maxLines: 2,)),
+                          Icon(Icons.directions, color: ThemeColors.greensDark, size: 38,),
+                        ],
+                      ),
+                    ),
+                ],
+            ),
+          ),
       ),
     );
+    // return Card(
+    //   elevation: 5,
+    //   color: ThemeColors.greensPrimary,
+    //   child: ListTile(
+    //     leading: Container(
+    //       width: 100,
+    //       child: Column(
+    //         children: [
+    //           Text("${date.day}", style: numStyle),
+    //           Text(monthAsString(date.month), style: monthStyle),
+    //         ],
+    //       ),
+    //     ),
+    //     title: Column(
+    //       children: [
+    //         Text(name, style: nameStyle),
+    //         Divider(color: theme.colorScheme.onPrimaryContainer),
+    //       ],
+    //     ),
+    //     subtitle: Column(
+    //       children: [
+    //         if (location != null) Text(location!, style: locationStyle),
+    //       ],
+    //     ),
+    //     trailing:
+    //         (location != null)
+    //             ? ElevatedButton(
+    //               style: ElevatedButton.styleFrom(
+    //                 backgroundColor: ThemeColors.greensLight,
+    //                 foregroundColor: ThemeColors.blacksText,
+    //               ),
+    //               onPressed: () {
+    //                 MapsLauncher.launchQuery(location!);
+    //               },
+    //               child: Icon(Icons.directions),
+    //             )
+    //             : null,
+    //   ),
+    // );
   }
 }
 
