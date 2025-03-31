@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
     // appState.updateSchedule();
     var events = appState.clubEvents;
     final nextEvent = getNextEvent(events);
-    var theme = Theme.of(context);
 
     return Center(
       child: Column(
@@ -35,7 +34,7 @@ class HomePage extends StatelessWidget {
                 date: nextEvent.date,
                 location: nextEvent.location,
               )
-              : CircularProgressIndicator(color: theme.colorScheme.onPrimary),
+              : CircularProgressIndicator(color: ThemeColors.whitesOffWhite),
           SizedBox(height: 20),
           Text(
             "Hope to see you there!",
