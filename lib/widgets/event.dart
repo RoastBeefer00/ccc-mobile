@@ -18,42 +18,57 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.all(8.0),
       child: Container(
+          // color: ThemeColors.chessBlack,
           decoration: BoxDecoration(
-            color: ThemeColors.chessGreenLight,
-            borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: ThemeColors.greensDark,
-              offset: Offset(0, 2),
-              blurRadius: 2,
-            ),
-          ],
+          color: ThemeColors.chessBlack,
+          borderRadius: BorderRadius.circular(10),
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: ThemeColors.greensDark,
+          //     offset: Offset(0, 2),
+          //     blurRadius: 2,
+          //   ),
+          // ],
           ),
-          child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                    Text(DateFormat('MMMM dd, yyyy').add_jm().format(date), style: TextStyle(color: ThemeColors.blacksText, fontWeight: FontWeight.w500),),
-                    Text(name, style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: ThemeColors.greensDarkest)),
-                    Divider(color: ThemeColors.greensDarkest, thickness: 2,),
-                    if (location != null) InkWell(
-                      onTap: () {
-                        MapsLauncher.launchQuery(location!);
-                      },
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                  Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: ThemeColors.chessGreenLight,
+                          borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Text(DateFormat('MMMM dd, yyyy').add_jm().format(date), style: TextStyle(color: ThemeColors.chessBlack, fontWeight: FontWeight.w500), textAlign: TextAlign.left,),
+                            Text(name, style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: ThemeColors.chessBlack), textAlign: TextAlign.left,),
+                          ],
+                        ),
+                      )
+                  ),
+                  // Divider(color: ThemeColors.chessBlack, thickness: 2,),
+                  if (location != null) InkWell(
+                    onTap: () {
+                      MapsLauncher.launchQuery(location!);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           // SizedBox(width: 8),
-                          Flexible(child: Text(location!, style: TextStyle(color: ThemeColors.blacksText, fontSize: 16, fontWeight: FontWeight.w500), maxLines: 2,)),
-                          Icon(Icons.directions, color: ThemeColors.greensDark, size: 38,),
+                          Flexible(child: Text(location!, style: TextStyle(color: ThemeColors.whitesOffWhite, fontSize: 16, fontWeight: FontWeight.w500), maxLines: 2,)),
+                          Icon(Icons.directions, color: ThemeColors.chessGreenLight, size: 38,),
                         ],
                       ),
                     ),
-                ],
-            ),
+                  ),
+              ],
           ),
       ),
     );

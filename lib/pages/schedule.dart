@@ -22,128 +22,45 @@ class _SchedulePageState extends State<SchedulePage> {
     for (var event in month.events) {
       print(event.name);
     }
-    // var theme = Theme.of(context);
-    //
-    // void onItemTapped(int index) {
-    //   setState(() {
-    //     selectedIndex = index;
-    //   });
-    // }
 
     return MaterialApp(
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          backgroundColor: ThemeColors.graysBackground,
+          backgroundColor: ThemeColors.chessBlackBackground,
           appBar: TabBar(
-              dividerColor: ThemeColors.greensPrimary,
-              indicatorColor: ThemeColors.greensDarkest,
-              indicatorWeight: 4,
-              indicatorSize: TabBarIndicatorSize.tab,
-              unselectedLabelColor: ThemeColors.graysText,
-              labelColor: ThemeColors.greensDarkest,
-              labelStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-              tabs: [
-            for (var i = 0; i < months.length; i++)
-              Tab(
-                text: months[i].name,
-              ),
-              ],
-            ),
+            dividerColor: ThemeColors.whitesOffWhite,
+            indicatorColor: ThemeColors.chessGreenLight,
+            indicatorWeight: 4,
+            indicatorSize: TabBarIndicatorSize.tab,
+            unselectedLabelColor: ThemeColors.whitesOffWhite,
+            labelColor: ThemeColors.chessGreenLight,
+            labelStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            tabs: [
+              for (var i = 0; i < months.length; i++) Tab(text: months[i].name),
+            ],
+          ),
           body: TabBarView(
             children: [
-            for (var i = 0; i < months.length; i++)
-              ListView(
-            children: [
-              for (var event in months[i].events)
-                ListTile(
-                  title: EventCard(
-                    name: event.name,
-                    date: event.date,
-                    location: event.location,
-                  ),
+              for (var i = 0; i < months.length; i++)
+                ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    for (var event in months[i].events)
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        title: EventCard(
+                          name: event.name,
+                          date: event.date,
+                          location: event.location,
+                        ),
+                      ),
+                  ],
                 ),
-            ],
-              ),
             ],
           ),
         ),
       ),
     );
-    // return Center(
-    // return DefaultTabController(length: 3, child: Column(
-    //   children: [
-    //     TabBar(
-    //       tabs: [
-    //         for (var i = 0; i < months.length; i++)
-    //           Tab(
-    //             text: months[i].name,
-    //           ),
-    //       ],
-    //     ),
-    //     TabBarView(
-    //       children: [
-    //         for (var i = 0; i < months.length; i++)
-    //           ListView(
-    //         children: [
-    //           for (var event in months[i].events)
-    //             ListTile(
-    //               title: EventCard(
-    //                 name: event.name,
-    //                 date: event.date,
-    //                 location: event.location,
-    //               ),
-    //             ),
-    //         ],
-    //           ),
-    //       ],
-    //     ),
-    //   ],
-    //   )
-    // );
-    // return Center(
-    //   child: Column(
-    //     children: [
-    //       SizedBox(height: 20),
-    //       Row(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         spacing: 20,
-    //         children: [
-    //           for (var i = 0; i < months.length; i++)
-    //             ElevatedButton(
-    //               onPressed: () {
-    //                 onItemTapped(i);
-    //               },
-    //               style: ElevatedButton.styleFrom(
-    //                 foregroundColor:
-    //                     i == selectedIndex
-    //                         ? theme.colorScheme.onPrimaryContainer
-    //                         : theme.colorScheme.onSecondary,
-    //                 backgroundColor:
-    //                     i == selectedIndex
-    //                         ? theme.colorScheme.primaryContainer
-    //                         : theme.colorScheme.secondary,
-    //               ),
-    //               child: Text(months[i].name),
-    //             ),
-    //         ],
-    //       ),
-    //       Expanded(
-    //         child: ListView(
-    //           children: [
-    //             for (var event in month.events)
-    //               ListTile(
-    //                 title: EventCard(
-    //                   name: event.name,
-    //                   date: event.date,
-    //                   location: event.location,
-    //                 ),
-    //               ),
-    //           ],
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 }

@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           ),
           body: Center(
             child: Container(
-              color: ThemeColors.graysBackground,
+              color: ThemeColors.chessBlackBackground,
               child: page,
             ),
           ),

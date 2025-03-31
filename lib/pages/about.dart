@@ -19,7 +19,7 @@ class FavoritesPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w700,
-                color: ThemeColors.greensDarkest,
+                color: ThemeColors.chessGreenLight,
               ),
             ),
             SizedBox(height: 10),
@@ -30,16 +30,16 @@ class FavoritesPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 height: 1.5,
-                color: Colors.grey[800],
+                color: ThemeColors.whitesOffWhite,
               ),
             ),
             SizedBox(height: 20),
             Row(
             mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.picture_in_picture, color: ThemeColors.greensDarkest, size: 30,),
-                Icon(Icons.facebook, color: ThemeColors.greensDarkest, size: 30,),
-                Icon(Icons.web, color: ThemeColors.greensDarkest, size: 30,)
+                Icon(Icons.picture_in_picture, color: ThemeColors.chessGreenLight, size: 30,),
+                Icon(Icons.facebook, color: ThemeColors.chessGreenLight, size: 30,),
+                Icon(Icons.web, color: ThemeColors.chessGreenLight, size: 30,)
             ],)
           ],
         ),
