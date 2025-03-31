@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           size: 30,
           color:
               (selectedIndex == 0)
-                  ? ThemeColors.greensPrimary
+                  ? ThemeColors.chessBlack
                   : ThemeColors.chessTan,
         ),
         label: "Home",
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           size: 30,
           color:
               (selectedIndex == 1)
-                  ? ThemeColors.greensPrimary
+                  ? ThemeColors.chessBlack
                   : ThemeColors.chessTan,
         ),
         label: "About Us",
@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           size: 30,
           color:
               (selectedIndex == 2)
-                  ? ThemeColors.greensPrimary
+                  ? ThemeColors.chessBlack
                   : ThemeColors.chessTan,
         ),
         label: "Schedule",
@@ -93,7 +93,6 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final theme = Theme.of(context);
         return Scaffold(
           appBar: AppBar(
             title: Center(
@@ -113,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
           bottomNavigationBar: NavigationBarTheme(
             data: NavigationBarThemeData(
             backgroundColor: ThemeColors.chessBlack,
-              indicatorColor: ThemeColors.whitesOffWhite,
+              indicatorColor: ThemeColors.chessGreenLight,
               labelTextStyle: MaterialStateProperty.resolveWith<TextStyle>(
                 (Set<MaterialState> states) => TextStyle(color: ThemeColors.whitesOffWhite, fontSize: 16)              
               ),

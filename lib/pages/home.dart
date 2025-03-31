@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Text("Our next meeting will be at...", style: TextStyle(color: ThemeColors.blacksText, fontSize: 30, fontWeight: FontWeight.w500)),
+            child: Text("Our next meeting is...", style: TextStyle(color: ThemeColors.blacksText, fontSize: 30, fontWeight: FontWeight.w500)),
           ),
           (nextEvent != null)
               ? EventCard(
@@ -33,7 +33,8 @@ class HomePage extends StatelessWidget {
                 location: nextEvent.location,
               )
               : CircularProgressIndicator(color: theme.colorScheme.onPrimary),
-          Text("We hope to see you there!", style: welcomeStyle),
+          SizedBox(height: 20),
+          Text("Hope to see you there!", style: TextStyle(color: ThemeColors.blacksText, fontSize: 30, fontWeight: FontWeight.w500)),
         ],
       ),
     );

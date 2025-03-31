@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:intl/intl.dart';
 import '../colors.dart';
 
 class EventCard extends StatelessWidget {
@@ -20,7 +21,7 @@ class EventCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Container(
           decoration: BoxDecoration(
-            color: ThemeColors.whitesOffWhite,
+            color: ThemeColors.chessGreenLight,
             borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -35,14 +36,10 @@ class EventCard extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                    Text("${monthAsStringLong(date.month)} 13th, 7:00pm", style: TextStyle(color: ThemeColors.blacksText, fontSize: 16, fontWeight: FontWeight.w500)),
-                    Text("Amaro Winery", style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: ThemeColors.greensDarkest)),
+                    Text(DateFormat('MMMM dd, yyyy').add_jm().format(date), style: TextStyle(color: ThemeColors.blacksText, fontWeight: FontWeight.w500),),
+                    Text(name, style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: ThemeColors.greensDarkest)),
                     Divider(color: ThemeColors.greensDarkest, thickness: 2,),
                     if (location != null) InkWell(
-                      highlightColor: ThemeColors.greensDark,
-                      hoverColor: ThemeColors.greensDark,
-                      splashColor: ThemeColors.greensDark,
-                      focusColor: ThemeColors.greensDark,
                       onTap: () {
                         MapsLauncher.launchQuery(location!);
                       },
