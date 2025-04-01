@@ -14,37 +14,42 @@ class HomePage extends StatelessWidget {
     final nextEvent = getNextEvent(events);
 
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              "Our next meeting is...",
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image(image: AssetImage('assets/images/ccc.png'), height: 150,),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                "Our next meeting is...",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: ThemeColors.whitesOffWhite,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            (nextEvent != null)
+                ? EventCard(
+                  name: nextEvent.name,
+                  date: nextEvent.date,
+                  location: nextEvent.location,
+                )
+                : CircularProgressIndicator(color: ThemeColors.whitesOffWhite),
+            SizedBox(height: 20),
+            Text(
+              "Hope to see you there!",
+                textAlign: TextAlign.center,
               style: TextStyle(
                 color: ThemeColors.whitesOffWhite,
                 fontSize: 30,
                 fontWeight: FontWeight.w500,
               ),
             ),
-          ),
-          (nextEvent != null)
-              ? EventCard(
-                name: nextEvent.name,
-                date: nextEvent.date,
-                location: nextEvent.location,
-              )
-              : CircularProgressIndicator(color: ThemeColors.whitesOffWhite),
-          SizedBox(height: 20),
-          Text(
-            "Hope to see you there!",
-            style: TextStyle(
-              color: ThemeColors.whitesOffWhite,
-              fontSize: 30,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

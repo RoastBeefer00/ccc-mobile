@@ -45,8 +45,8 @@ class EventCard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           children: [
-                            Text(DateFormat('MMMM dd, yyyy').add_jm().format(date), style: TextStyle(color: ThemeColors.chessBlack, fontWeight: FontWeight.w500), textAlign: TextAlign.left,),
-                            Text(name, style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: ThemeColors.chessBlack), textAlign: TextAlign.left,),
+                            Text(DateFormat('MMMM dd, yyyy').add_jm().format(date), style: TextStyle(color: ThemeColors.chessBlack, fontWeight: FontWeight.w500), textAlign: TextAlign.center,),
+                            Text(name, style: TextStyle(fontFamily: 'Lora', fontSize: 28, color: ThemeColors.chessBlack), textAlign: TextAlign.center,),
                           ],
                         ),
                       )
@@ -57,12 +57,12 @@ class EventCard extends StatelessWidget {
                       MapsLauncher.launchQuery(location!);
                     },
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          // SizedBox(width: 8),
-                          Flexible(child: Text(location!, style: TextStyle(color: ThemeColors.whitesOffWhite, fontSize: 16, fontWeight: FontWeight.w500), maxLines: 2,)),
+                          Flexible(child: Text(location!, style: TextStyle(color: ThemeColors.whitesOffWhite, fontSize: 16, fontWeight: FontWeight.w500), maxLines: 2, textAlign: TextAlign.left,)),
+                          SizedBox(width: 12),
                           Icon(Icons.directions, color: ThemeColors.chessGreenLight, size: 38,),
                         ],
                       ),
@@ -72,45 +72,6 @@ class EventCard extends StatelessWidget {
           ),
       ),
     );
-    // return Card(
-    //   elevation: 5,
-    //   color: ThemeColors.greensPrimary,
-    //   child: ListTile(
-    //     leading: Container(
-    //       width: 100,
-    //       child: Column(
-    //         children: [
-    //           Text("${date.day}", style: numStyle),
-    //           Text(monthAsString(date.month), style: monthStyle),
-    //         ],
-    //       ),
-    //     ),
-    //     title: Column(
-    //       children: [
-    //         Text(name, style: nameStyle),
-    //         Divider(color: theme.colorScheme.onPrimaryContainer),
-    //       ],
-    //     ),
-    //     subtitle: Column(
-    //       children: [
-    //         if (location != null) Text(location!, style: locationStyle),
-    //       ],
-    //     ),
-    //     trailing:
-    //         (location != null)
-    //             ? ElevatedButton(
-    //               style: ElevatedButton.styleFrom(
-    //                 backgroundColor: ThemeColors.greensLight,
-    //                 foregroundColor: ThemeColors.blacksText,
-    //               ),
-    //               onPressed: () {
-    //                 MapsLauncher.launchQuery(location!);
-    //               },
-    //               child: Icon(Icons.directions),
-    //             )
-    //             : null,
-    //   ),
-    // );
   }
 }
 

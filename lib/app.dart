@@ -5,6 +5,7 @@ import './pages/about.dart';
 import './pages/schedule.dart';
 import './state.dart';
 import './colors.dart';
+import 'package:chess_vectors_flutter/chess_vectors_flutter.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -57,14 +58,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
 
     var destinations = [
       NavigationDestination(
-        icon: Icon(
-          Icons.home,
-          size: 30,
-          color:
-              (selectedIndex == 0)
-                  ? ThemeColors.chessBlack
-                  : ThemeColors.chessTan,
-        ),
+        icon: WhiteKnight(fillColor: (selectedIndex == 0) ? ThemeColors.chessBlack : ThemeColors.chessTan, size: 30,),
         label: "Home",
       ),
       NavigationDestination(
@@ -96,9 +90,16 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         return Scaffold(
           appBar: AppBar(
             title: Center(
-              child: Text(
-                "Cruces Chess Club",
-              style: TextStyle(fontFamily: 'Lora', fontSize: 32, color: ThemeColors.whitesOffWhite),
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                Image(image: AssetImage('assets/images/ccc.png'), height: 30,),
+                SizedBox(width: 10),
+                  Text(
+                    "Cruces Chess Club",
+                  style: TextStyle(fontFamily: 'Lora', fontSize: 32, color: ThemeColors.whitesOffWhite),
+                  ),
+                ],
               ),
             ),
             backgroundColor: ThemeColors.chessBlack,

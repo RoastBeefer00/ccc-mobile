@@ -5,7 +5,7 @@ class ThemeColors {
   static const chessGreenLight = Color(0xff9DBA7F);
   static const chessTan = Color(0xffebecd0);
   static const chessBlack = Color(0xff312e2b);
-  static const chessBlackBackground = Color(0xff363636);
+  static const chessBlackBackground = Color(0xff383838);
   static const greensLight = Color(0xFFd8fa9d);
   static const greensPrimary = Color(0xFF45753c);
   static const greensDark = Color(0xff305730);
