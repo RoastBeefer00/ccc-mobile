@@ -93,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
               child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                Image(image: AssetImage('assets/images/ccc.png'), height: 30,),
+                Image(image: AssetImage('assets/images/ccc.png'), height: 26,),
                 SizedBox(width: 10),
                   Text(
                     "Cruces Chess Club",

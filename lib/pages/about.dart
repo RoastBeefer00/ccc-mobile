@@ -1,6 +1,8 @@
+import 'package:chess_vectors_flutter/chess_vectors_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../state.dart';
 import '../colors.dart';
@@ -52,11 +54,21 @@ class FavoritesPage extends StatelessWidget {
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(FontAwesomeIcons.instagram, color: ThemeColors.chessGreenLight, size: 36,),
+                    IconButton(icon: Icon(FontAwesomeIcons.instagram, color: ThemeColors.chessGreenLight, size: 36,), onPressed: () {
+                        launchUrl(Uri.parse("https://www.instagram.com/cruceschessclub?igsh=Z2tvamljcHVkNThh"));     
+                    }),
                     SizedBox(width: 16),
-                    Icon(Icons.facebook, color: ThemeColors.chessGreenLight, size: 36,),
+                    IconButton(icon: Icon(Icons.facebook, color: ThemeColors.chessGreenLight, size: 36,), onPressed: () {
+                        launchUrl(Uri.parse("https://www.facebook.com/groups/cruceschessclub/"));     
+                    }),
                     SizedBox(width: 16),
-                    Icon(Icons.language, color: ThemeColors.chessGreenLight, size: 36,)
+                    IconButton(icon: Icon(Icons.language, color: ThemeColors.chessGreenLight, size: 36,), onPressed: () {
+                        launchUrl(Uri.parse("https://www.cruceschessclub.org"));     
+                    },),
+                    SizedBox(width: 16),
+                    IconButton(icon: WhitePawn(fillColor: ThemeColors.chessGreenLight, size: 36,), onPressed: () {
+                        launchUrl(Uri.parse("https://www.chess.com/club/cruces-chess-club"));     
+                    }),
                 ],)
               ],
             ),
