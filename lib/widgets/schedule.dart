@@ -13,22 +13,25 @@ final apiKey = Platform.isAndroid ? androidApiKey : iosApiKey;
 
 class ClubEvent {
   final String name;
-  final DateTime date;
+  final DateTime startDate;
+  final DateTime endDate;
   final String? location;
 
-  const ClubEvent({required this.name, required this.date, this.location});
+  const ClubEvent({required this.name, required this.startDate, required this.endDate, this.location});
 
   factory ClubEvent.fromJson(Map<String, dynamic> json) {
     if (json['location'] == null) {
       return ClubEvent(
         name: json['summary'] as String,
-        date: DateTime.parse(json['start']['dateTime'] as String).toLocal(),
+        startDate: DateTime.parse(json['start']['dateTime'] as String).toLocal(),
+        endDate: DateTime.parse(json['end']['dateTime'] as String).toLocal(),
         location: null,
       );
     } else {
       return ClubEvent(
         name: json['summary'] as String,
-        date: DateTime.parse(json['start']['dateTime'] as String).toLocal(),
+        startDate: DateTime.parse(json['start']['dateTime'] as String).toLocal(),
+        endDate: DateTime.parse(json['end']['dateTime'] as String).toLocal(),
         location: json['location'] as String,
       );
     }
@@ -59,11 +62,11 @@ Future<List<ClubEvent>> fetchSchedule(DateTime start, DateTime end) async {
         continue;
       }
       var event = ClubEvent.fromJson(item);
-      if (event.date.isAfter(start) && event.date.isBefore(end)) {
+      if (event.startDate.isAfter(start) && event.startDate.isBefore(end)) {
         events.add(event);
       }
     }
-    events.sort((a, b) => a.date.compareTo(b.date));
+    events.sort((a, b) => a.startDate.compareTo(b.startDate));
     return events;
   } else {
     // If the server did not return a 200 OK response,
@@ -97,11 +100,11 @@ Future<List<ClubEvent>> getRecurringEvents(
         continue;
       }
       var event = ClubEvent.fromJson(item);
-      if (event.date.isAfter(start) && event.date.isBefore(end)) {
+      if (event.startDate.isAfter(start) && event.startDate.isBefore(end)) {
         events.add(event);
       }
     }
-    events.sort((a, b) => a.date.compareTo(b.date));
+    events.sort((a, b) => a.startDate.compareTo(b.startDate));
     return events;
   } else {
     // If the server did not return a 200 OK response,
@@ -133,7 +136,7 @@ DateTime getLastDayOfTheMonth(DateTime date) {
 ClubEvent? getNextEvent(List<ClubEvent> events) {
   var now = DateTime.now();
   for (var event in events) {
-    if (event.date.isAfter(now)) {
+    if (event.endDate.isAfter(now)) {
       return event;
     }
   }

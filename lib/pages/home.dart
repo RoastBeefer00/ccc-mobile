@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
             (nextEvent != null)
                 ? EventCard(
                   name: nextEvent.name,
-                  date: nextEvent.date,
+                  date: nextEvent.startDate,
                   location: nextEvent.location,
                 )
                 : CircularProgressIndicator(color: ThemeColors.whitesOffWhite),

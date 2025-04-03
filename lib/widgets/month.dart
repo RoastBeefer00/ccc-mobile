@@ -19,7 +19,7 @@ List<Month> getMonths(List<ClubEvent> events) {
   for (var num in monthNums) {
     var month = Month(name: monthAsString(num), events: []);
     for (var event in events) {
-      if (event.date.month == num) {
+      if (event.startDate.month == num) {
         month.addEvent(event);
       }
     }
@@ -33,8 +33,8 @@ List<Month> getMonths(List<ClubEvent> events) {
 List<int> getMonthNums(List<ClubEvent> events) {
   var months = <int>[];
   for (var event in events) {
-    if (!months.contains(event.date.month)) {
-      months.add(event.date.month);
+    if (!months.contains(event.startDate.month)) {
+      months.add(event.startDate.month);
     }
   }
   return months;

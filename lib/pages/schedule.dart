@@ -20,7 +20,7 @@ class _SchedulePageState extends State<SchedulePage> {
     var months = getMonths(events);
     var month = months[selectedIndex];
     for (var event in month.events) {
-      print(event.name);
+      print("${event.name} => ${event.startDate} - ${event.endDate}");
     }
 
     return MaterialApp(
@@ -51,7 +51,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         contentPadding: EdgeInsets.zero,
                         title: EventCard(
                           name: event.name,
-                          date: event.date,
+                          date: event.startDate,
                           location: event.location,
                         ),
                       ),
